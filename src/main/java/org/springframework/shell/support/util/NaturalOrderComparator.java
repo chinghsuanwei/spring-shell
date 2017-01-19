@@ -180,9 +180,21 @@ public class NaturalOrderComparator<E> implements Comparator<E> {
 				return nza - nzb;
 			}
 
-			if (ca < cb) {
+			char lca = Character.toLowerCase(ca);
+			char lcb = Character.toLowerCase(cb);
+			
+			//Usually we want to arrage file list in alphabetical order (ex: AaBbCc...XxYyZz), not in ACSII order (ex: ABCD...XYZ...abcd...xyz).
+			if( lca == lcb ){
+				
+				if (ca < cb) {
+					return -1;
+				} else if (ca > cb) {
+					return +1;
+				}
+			
+			} else if( lca < lcb ) {
 				return -1;
-			} else if (ca > cb) {
+			} else if ( lca > lcb) {
 				return +1;
 			}
 
